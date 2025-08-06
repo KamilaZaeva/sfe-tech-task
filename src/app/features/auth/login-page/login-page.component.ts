@@ -1,5 +1,5 @@
 import { Component, inject, signal, WritableSignal } from '@angular/core';
-import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
+import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import { MatCard } from '@angular/material/card';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
@@ -16,12 +16,15 @@ import { MatButton } from '@angular/material/button';
     MatCard,
     ReactiveFormsModule,
     MatButton,
+    MatError,
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })
 export class LoginPageComponent {
   private fb: FormBuilder = inject(FormBuilder);
+  private authService: AuthService = inject(AuthService);
+  private router: Router = inject(Router);
 
   error: WritableSignal<string> = signal('');
 
@@ -30,5 +33,25 @@ export class LoginPageComponent {
     password: ['', Validators.required],
   });
 
-  submit(): void {}
+  submit(): void {
+    if (this.form.invalid) {
+      this.error.set('Please enter username and password.');
+      return;
+    }
+
+    const { username, password } = this.form.value;
+    this.authService.login(username!, password!).subscribe({
+      next: (res) => {
+        if (res.token) {
+          this.authService.setToken(res.token);
+          void this.router.navigate(['/']);
+        } else {
+          this.error.set('Invalid response from server.');
+        }
+      },
+      error: () => {
+        this.error.set('Login failed. Please check your credentials.');
+      }
+    });
+  }
 }
