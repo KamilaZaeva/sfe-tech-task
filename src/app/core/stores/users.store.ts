@@ -26,7 +26,7 @@ export class UserStore {
 
   upsertUser(user: User) {
     const current = this.users();
-    const index = current.findIndex(u => u.id === user.id);
+    const index = current.findIndex((u) => u.id === user.id);
     if (index === -1) {
       this.users.set([...current, user]);
     } else {

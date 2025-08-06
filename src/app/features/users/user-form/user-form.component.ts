@@ -15,10 +15,10 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   templateUrl: './user-form.component.html',
-  styleUrl: './user-form.component.scss'
+  styleUrl: './user-form.component.scss',
 })
 export class UserFormComponent {
   user = input<User | null>();
@@ -31,7 +31,7 @@ export class UserFormComponent {
   form = this.fb.group({
     username: ['', Validators.required],
     role: ['', Validators.required],
-    password: ['']
+    password: [''],
   });
 
   submit(): void {

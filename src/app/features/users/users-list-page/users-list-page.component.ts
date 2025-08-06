@@ -6,12 +6,9 @@ import { UsersFacadeService } from '../../../core/facades/users-facade.service';
 
 @Component({
   selector: 'app-users-list-page',
-  imports: [
-    UsersListComponent,
-    MatButton
-  ],
+  imports: [UsersListComponent, MatButton],
   templateUrl: './users-list-page.component.html',
-  styleUrl: './users-list-page.component.scss'
+  styleUrl: './users-list-page.component.scss',
 })
 export class UsersListPageComponent {
   facade = inject(UsersFacadeService);

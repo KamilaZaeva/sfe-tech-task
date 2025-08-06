@@ -5,7 +5,7 @@ import { User } from '../../../shared/models/user';
   selector: 'app-users-list',
   imports: [],
   templateUrl: './users-list.component.html',
-  styleUrl: './users-list.component.scss'
+  styleUrl: './users-list.component.scss',
 })
 export class UsersListComponent {
   users = input<User[]>();

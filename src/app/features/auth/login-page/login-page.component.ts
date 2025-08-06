@@ -15,10 +15,10 @@ import { MatButton } from '@angular/material/button';
     MatFormField,
     MatCard,
     ReactiveFormsModule,
-    MatButton
+    MatButton,
   ],
   templateUrl: './login-page.component.html',
-  styleUrl: './login-page.component.scss'
+  styleUrl: './login-page.component.scss',
 })
 export class LoginPageComponent {
   private fb: FormBuilder = inject(FormBuilder);
@@ -27,9 +27,8 @@ export class LoginPageComponent {
 
   form = this.fb.group({
     username: ['', Validators.required],
-    password: ['', Validators.required]
+    password: ['', Validators.required],
   });
 
-  submit(): void {
-  }
+  submit(): void {}
 }
