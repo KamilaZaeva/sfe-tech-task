@@ -44,7 +44,7 @@ export class LoginPageComponent {
       next: (res) => {
         if (res.token) {
           this.authService.setToken(res.token);
-          void this.router.navigate(['/']);
+          void this.router.navigate(['/users']);
         } else {
           this.error.set('Invalid response from server.');
         }
